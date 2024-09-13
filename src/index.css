@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --font-hand: "Gochi Hand", cursive;
+    --font-poppins: "Poppins", system-ui;
+    --toastify-toast-width: 450px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    font-family: var(--font-poppins);
+}
+
+/* html {
+    height: -webkit-fill-available;
+} */
+
+
+.font-hand {
+    @apply font-sans;
+    font-family: var(--font-hand);
+}
+
+.font-poppins {
+    @apply font-sans;
+    font-family: var(--font-poppins);
+}
+
+.MuiDataGrid-toolbarContainer {
+    flex-direction: row-reverse;
+}
+
+/* textarea,
+input.text,
+input.select,
+input[type="text"],
+input[type="button"],
+input[type="submit"],
+input[type="select"],
+input[type="date"]  */
+select {
+    -webkit-appearance: initial;
+    -moz-appearance: initial;
+    appearance: initial;
+}
+
+input[type="date"] {
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}

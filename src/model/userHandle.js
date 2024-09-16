@@ -1,5 +1,5 @@
 import { database } from './firebaseConfig';
-import { child, equalTo, get, orderByChild, query, ref, set } from "firebase/database";
+import { child, equalTo, get, onValue, orderByChild, query, ref, remove, set, update } from "firebase/database";
 
 export const CheckUserCategory = async (userCategory) => {
     if (!database) {
@@ -18,7 +18,7 @@ export const CheckUserCategory = async (userCategory) => {
 //     if (!database) {
 //         throw new Error("Firebase database is not initialized");
 //     }
-//     const AddUserCategoryRef = ref(database, 'users/userscategory');
+//     const prefix = userCategory.slice(0, 2).toUpperCase();
 //     const counterRef = child(ref(database, "counters"), "userCategoryCounter");
 //     const snapshot = await get(counterRef);
 //     let nextId = 1;
@@ -27,45 +27,95 @@ export const CheckUserCategory = async (userCategory) => {
 //     } else {
 //         await set(counterRef, nextId);
 //     }
-//     const newUserCategoryRef = child(AddUserCategoryRef, nextId.toString());
-//     await set(newUserCategoryRef, {
+//     const categoryId = `${prefix}${nextId}`;
+//     const AddUserCategoryRef = ref(database, `users/userscategory/${categoryId}`);
+//     await set(AddUserCategoryRef, {
 //         usercategory: userCategory,
-//         ...userCategoryData
+//         ...userCategoryData,
+//         categoryId
 //     });
 //     await set(counterRef, nextId);
-//     return nextId;
+//     return categoryId;
 // };
+
+
+export const FetchUserCategory = (callback) => {
+    const userCategoryRef = ref(database, 'users/userscategory');
+    const unsubscribe = onValue(userCategoryRef, (snapshot) => {
+        const categoriesData = snapshot.val();
+        if (categoriesData) {
+            const formattedCategories = Object.keys(categoriesData).map((key) => ({
+                id: key,
+                ...categoriesData[key],
+            }));
+            callback(formattedCategories);
+        } else {
+            callback([]);
+        }
+    });
+    return unsubscribe;
+};
 export const AddUserCategory = async (userCategory, userCategoryData) => {
     if (!database) {
         throw new Error("Firebase database is not initialized");
     }
 
-    // Step 1: Generate category ID (first two letters capitalized + counter)
-    const prefix = userCategory.slice(0, 2).toUpperCase();  // Get first two letters and capitalize
-    const counterRef = child(ref(database, "counters"), "userCategoryCounter");
+    // Reference to counters and availableIds in Firebase
+    const counterRef = ref(database, "counters/userCategoryCounter");
+    const availableIdsRef = ref(database, "counters/availableIds");
 
-    const snapshot = await get(counterRef);
-    let nextId = 1;
+    // Fetch available IDs from the database
+    const availableIdsSnapshot = await get(availableIdsRef);
+    let availableIds = availableIdsSnapshot.exists() ? availableIdsSnapshot.val() : [];
 
-    if (snapshot.exists()) {
-        nextId = snapshot.val() + 1;  // Increment counter
+    // Determine the next ID: use from availableIds or increment the counter
+    let nextId;
+    if (availableIds.length > 0) {
+        // Use the lowest available ID
+        nextId = Math.min(...availableIds);
+        // Remove the used ID from availableIds
+        availableIds = availableIds.filter(id => id !== nextId);
     } else {
-        await set(counterRef, nextId);  // Initialize counter if not exists
+        // Fetch the current counter value
+        const counterSnapshot = await get(counterRef);
+        nextId = counterSnapshot.exists() ? counterSnapshot.val() + 1 : 1;
+        // Update the counter in Firebase
+        await set(counterRef, nextId);
     }
 
-    // Generate the final category ID
-    const categoryId = `${prefix}${nextId}`;
-
-    // Step 2: Set the new category in the database, using the categoryId as the key
-    const AddUserCategoryRef = ref(database, `users/userscategory/${categoryId}`);
+    // Reference to the new user category in Firebase
+    const AddUserCategoryRef = ref(database, `users/userscategory/${nextId}`);
     await set(AddUserCategoryRef, {
-        usercategory: userCategory,  // Store the category name
-        ...userCategoryData,         // Store any additional data (e.g., lastUpdated)
-        categoryId                   // Store the generated category ID
+        usercategory: userCategory,
+        ...userCategoryData,
+        id: nextId, // Use this ID as the key
     });
 
-    // Step 3: Update the counter for the next category
-    await set(counterRef, nextId);
+    // Update the available IDs in Firebase after usage
+    await set(availableIdsRef, availableIds); // Update the list to remove used ID
 
-    return categoryId;  // Return the generated category ID
+    return nextId;
+};
+
+// Function to handle category deletion and make the ID available again
+export const DeleteUserCategory = async (id) => {
+    if (!database) {
+        throw new Error("Firebase database is not initialized");
+    }
+
+    // Delete the category from the database
+    const userCategoryRef = ref(database, `users/userscategory/${id}`);
+    await set(userCategoryRef, null);
+
+    // Add the numeric ID back to availableIds
+    const availableIdsRef = ref(database, "counters/availableIds");
+    const availableIdsSnapshot = await get(availableIdsRef);
+    let availableIds = availableIdsSnapshot.exists() ? availableIdsSnapshot.val() : [];
+
+    // Add the deleted ID to the list if it's not already there
+    availableIds.push(id);
+    availableIds = [...new Set(availableIds)].sort((a, b) => a - b); // Ensure uniqueness and sorting
+
+    // Update the availableIds in Firebase
+    await set(availableIdsRef, availableIds);
 };

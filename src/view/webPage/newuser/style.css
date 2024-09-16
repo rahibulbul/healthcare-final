@@ -1,0 +1,17 @@
+.screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 350px);
+}
+
+.new-register-user {
+    width: 100%;
+    max-width: 700px;
+    padding: 20px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

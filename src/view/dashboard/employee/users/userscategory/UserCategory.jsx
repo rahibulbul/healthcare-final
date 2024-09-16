@@ -256,7 +256,7 @@ const EMPUserCategory = () => {
                 theme="colored"
                 transition={Slide}
             />
-            <div className="p-5 title flex flex-col fixed h-28 bg-white w-full z-50">
+            <div className="p-5 title flex flex-col fixed h-28 bg-white w-full z-10">
                 <span className="text-3xl font-bold text-slate-600">Users category</span>
                 <span className="text-base font-medium text-slate-500">
                     This page is to set user category to the company
@@ -320,7 +320,7 @@ const EMPUserCategory = () => {
                         />
                     </div>
                 </form>
-                <div className="list mt-5 w-[95%] overflow-auto">
+                <div className="list mt-5 w-full overflow-auto">
                     <DataGrid
                         rows={userCategories}
                         getRowId={(row) => row.id}

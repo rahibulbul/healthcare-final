@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { UseUserCategories, UserRegistration, findingUserName } from "../../../model/userHandle";
+import { ToastContainer, toast, Slide } from 'react-toastify';
 
 const Registration = () => {
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -40,7 +42,7 @@ const Registration = () => {
     const [userCategoryError, setUserCategoryError] = useState("");
     const [isUserCategoryTouched, setIsUserCategoryTouched] = useState(false);
     const [isUserCategoryValid, setIsUserCategoryValid] = useState(false);
-    // const categories = UseUserCategories();
+    const categories = UseUserCategories();
 
 
     const [password, setPassword] = useState("");
@@ -167,16 +169,16 @@ const Registration = () => {
             setUserNameError("Username must be at least 3 letters.");
             setIsUserNameValid(false);
         } else {
-            // const result = await findingUserName(value);
-            // if (result) {
-            //     setUserNameError("Username is available");
-            //     setIsUserNameValid(true);
-            // } else {
-            //     setUserNameError("Username is already taken");
-            //     setIsUserNameValid(false);
-            // }
-            setUserNameError("");
-            setIsUserNameValid(true);
+            const UserNameAvailable = await findingUserName(value);
+            if (UserNameAvailable) {
+                setUserNameError("Username is available");
+                setIsUserNameValid(true);
+            } else {
+                setUserNameError("Username is already taken");
+                setIsUserNameValid(false);
+            }
+            // setUserNameError("");
+            // setIsUserNameValid(true);
         }
     };
 
@@ -436,10 +438,199 @@ const Registration = () => {
         );
     };
 
+    const HandleRegistration = async (e) => {
+        e.preventDefault();
+
+        if (isSubmiting) return;
+        setIsSubmiting(true);
+
+        // const isUserCategoryValid = validateUserCategory(userCategory);
+
+        console.log("Title Valid:", isTitleValid);
+        console.log("Full Name Valid:", isFullNameValid);
+        console.log("Username Valid:", isUserNameValid);
+        console.log("Email Valid:", isEmailValid);
+        console.log("DOB Valid:", isDobValid);
+        console.log("User Category Valid:", isUserCategoryValid);
+        console.log("Password Valid:", isPasswordValid);
+        console.log("Terms Accepted:", isTermsAccepted);
+
+        if (
+            isTitleValid &&
+            isFullNameValid &&
+            isUserNameValid &&
+            isEmailValid &&
+            isDobValid &&
+            isUserCategoryValid &&
+            isPasswordValid &&
+            isTermsAccepted
+        ) {
+            try {
+                const currentDate = new Date();
+                const year = currentDate.getFullYear().toString();
+                const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+                const dayOfMonth = currentDate.getDate();
+                const week = Math.ceil(dayOfMonth / 7).toString();
+
+                const userPrefix = userCategory.slice(0, 2).toUpperCase();
+
+                const userData = {
+                    title: title,
+                    fullname: fullName,
+                    username: userName,
+                    email: email,
+                    recoveryemail: "",
+                    dob: dob,
+                    gender: "",
+                    race: "",
+                    religion: "",
+                    usercategory: userCategory,
+                    password: password,
+                    occupation: "",
+                    address: "",
+                    phonenumber: "",
+                    recoveryphonenumber: "",
+                    profilepicture: "",
+                    family: [
+                        {
+                            name: "",
+                            relationship: "",
+                            dob: "",
+                            phonenumber: "",
+                            address: "",
+                        }
+                    ],
+                    monthlyincome: 0,
+                    yearlyincome: 0,
+                    nhsnumber: "",
+                    registeredhospital: "",
+                    registeredpharmacy: "",
+                    registereddoctor: "",
+                    medicalhistorys: [
+                        {
+                            medicalhistoryid: "",
+                            medicalhistorytype: "",
+                            medicalhistorydate: "",
+                            medicalhistory: [],
+                        }
+                    ],
+                    medicalreports: [
+                        {
+                            medicalreportid: "",
+                            medicalreporttype: "",
+                            medicalreportdate: "",
+                            medicalreport: [],
+                        }
+                    ],
+                    insurancestatus: "None",
+                    insurancestartdate: "",
+                    insuranceenddate: "",
+                    insuranceprovider: "",
+                    insurancepolicynumber: "",
+                    insuranceplantype: "",
+                    insuranceclaim: [
+                        {
+                            insuranceclaimid: "",
+                            claimstartdate: "",
+                            claimenddate: "",
+                            reason: "",
+                            insuranceprovider: "",
+                        }
+                    ],
+                    insurancepaids: [
+                        {
+                            insurancepaidid: "",
+                            insurancepaiddate: "",
+                            insurancepaidamount: "",
+                            insurancepaidnextdate: "",
+                        }
+                    ],
+                    totalinsuranceclaim: 0,
+                    totalinsurancepaid: 0,
+                    insuranceCoverage: "",
+                    doctorappointments: [
+                        {
+                            doctorappointmentsid: "",
+                            doctorappointmentsplace: "",
+                            doctorappointmentsdate: "",
+                            doctorappointmentsreason: "",
+                        }
+                    ],
+                    appointments: [
+                        {
+                            appointmentsid: "",
+                            appointmentsplace: "",
+                            appointmentsdate: "",
+                            appointmentsreason: "",
+                        }
+                    ],
+                    hospitalappointments: [
+                        {
+                            hospitalappointmentsid: "",
+                            hospitalappointmentsplace: "",
+                            hospitalappointmentsdate: "",
+                            hospitalappointmentsreason: "",
+                        }
+                    ],
+                    lastAppointmentDate: "",
+                    nextAppointmentDate: "",
+                    bloodType: "",
+                    allergies: [],
+                    currentMedications: [],
+                    primaryDoctor: "",
+                    emergencycontact: [
+                        {
+                            name: "",
+                            relation: "",
+                            phone: ""
+                        }
+                    ],
+                    accountstatus: "verifying",
+                };
+                const UserID = await UserRegistration(userData, userCategory, year, month, week, userPrefix);
+
+                setTitle("");
+                setFullName("");
+                setUserName("");
+                setEmail("");
+                setUserCategory("");
+                setDob("");
+                setPassword("");
+                setConfirmPassword("");
+                setIsTermsAccepted(false);
+                setPasswordStrength(0);
+                setConfirmPasswordStrength(0);
+                toast.success("Your registration done. Redirecting ....")
+                setTimeout(() => {
+                    navigate("/newuser", { state: { userName, UserID } });
+                }, 2000);
+            } catch (error) {
+                console.log(error.message);
+                toast.error("Registration failed. Please try again.");
+            }
+        } else {
+            toast.warning("Please fix all the errors and fill out the form.");
+        }
+        setIsSubmiting(false);
+    }
+
     return (
         <div
             className='relative w-full mt-[100px] mb-20 md:mt-0 md:h-[calc(100vh_-_70px)] md:mb-0 bg-white flex-col justify-center items-center flex overflow-y-auto'
         >
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+                transition={Slide}
+            />
             <div
                 className="relative flex flex-col items-center">
                 <span className='text-3xl font-bold'>Hello there!</span>
@@ -448,6 +639,7 @@ const Registration = () => {
             <div className="relative">
                 <form
                     className='relative'
+                    onSubmit={HandleRegistration}
                 >
                     <div className="relative flex flex-col items-center">
                         <div className="group relative flex flex-col md:flex-row md:gap-10">
@@ -516,16 +708,16 @@ const Registration = () => {
                                     onBlur={handleUserNameBlur}
                                     className="relative w-full border-2 border-slate-300 rounded-2xl py-3 px-5 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer"
                                 />
-                                <i className={`fa-solid fa-circle-exclamation absolute -right-7 text-lg text-red-500 ${userNameError && isUserNameTouched ? "" : "hidden"}`} />
+                                <i className={`fa-solid fa-circle-exclamation absolute -right-7 text-lg text-red-500 ${userNameError && isUserNameTouched && !isUserNameValid ? "" : "hidden"}`} />
                                 <i className={`fa-solid fa-circle-check absolute -right-7 text-lg text-green-500 ${isUserNameValid ? "" : "hidden"}`} />
                                 <label
-                                    htmlFor="title"
+                                    htmlFor="username"
                                     className='absolute left-0 ml-5 px-2 font-semibold text-slate-500 bg-white pointer-events-none top-1/2 -translate-y-2/4 transform peer-focus:top-0 peer-valid:top-0 peer-focus:text-black peer-valid:text-black duration-500 text-base'
                                 >
                                     Enter username
                                 </label>
                                 <span
-                                    className='absolute bottom-0 translate-y-6 left-5 font-semibold text-red-500'
+                                    className={`absolute bottom-0 translate-y-6 left-5 font-semibold ${isUserNameValid ? 'text-green-500' : 'text-red-500'}`}
                                 >
                                     {userNameError}
                                 </span>
@@ -587,11 +779,11 @@ const Registration = () => {
                                     className="relative w-full border-2 bg-white border-slate-300 cursor-pointer rounded-2xl py-3 px-5 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer"
                                 >
                                     <option value=""></option>
-                                    {/* {categories.map((category) => (
-                                        <option key={category.id} value={category.userCategory}>
-                                            {category.userCategory}
+                                    {categories.map((category) => (
+                                        <option key={category.id} value={category.usercategory}>
+                                            {category.usercategory}
                                         </option>
-                                    ))} */}
+                                    ))}
                                 </select>
                                 <i className={`fa-solid fa-circle-exclamation absolute -right-7 text-lg text-red-500 ${userCategoryError && isUserCategoryTouched ? "" : "hidden"}`} />
                                 <i className={`fa-solid fa-circle-check absolute -right-7 text-lg text-green-500 ${isUserCategoryValid ? "" : "hidden"}`} />

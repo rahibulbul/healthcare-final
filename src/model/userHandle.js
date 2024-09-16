@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { database } from './firebaseConfig';
 import { child, equalTo, get, onValue, orderByChild, query, ref, remove, set, update } from "firebase/database";
 
@@ -18,7 +19,6 @@ export const AddUserCategory = async (userCategory, userCategoryData) => {
     if (!database) {
         throw new Error("Firebase database is not initialized");
     }
-    // const prefix = userCategory.slice(0, 2).toUpperCase();
     const counterRef = child(ref(database, "counters"), "userCategoryCounter");
     const snapshot = await get(counterRef);
     let nextId = 1;
@@ -55,3 +55,67 @@ export const FetchUserCategory = (callback) => {
     });
     return unsubscribe;
 };
+
+export const UseUserCategories = () => {
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        const userCategoryRef = ref(database, "users/userscategory");
+        const unsubscribe = onValue(userCategoryRef, (snapshot) => {
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                const fetchedCategories = Object.keys(data).map((key) => ({
+                    ...data[key],
+                    id: key,
+                }));
+                setCategories(fetchedCategories);
+            } else {
+                setCategories([]);
+            }
+        });
+        return () => unsubscribe();
+    }, []);
+
+    return categories;
+};
+
+export const findingUserName = async (username) => {
+    try {
+        const usersRef = ref(database, "users/user/");
+        const usersSnapshot = await get(usersRef);
+
+        if (usersSnapshot.exists()) {
+            const usersData = usersSnapshot.val();
+
+            for (const userId in usersData) {
+                const userData = usersData[userId];
+                if (userData.username === username) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    } catch (error) {
+        console.error("Error checking username availability:", error.message);
+        throw new Error("Failed to check username availability.");
+    }
+};
+
+
+export const UserRegistration = async (userData, userCategory, year, month, week, userPrefix) => {
+    try {
+        const RegisterUserCountRef = ref(database, `counters/userscounts/${year}/${month}/${week}/${userCategory}`);
+        const UserCountSnapshot = await get(RegisterUserCountRef);
+        let count = 1;
+        if (UserCountSnapshot.exists()) {
+            count = UserCountSnapshot.val() + 1;
+        }
+        const UserID = `${year}${month}${userPrefix}${count.toString().padStart(2, "0")}`;
+        await set(ref(database, `users/user/` + UserID), userData);
+        await set(RegisterUserCountRef, count);
+        return UserID;
+    } catch (error) {
+        console.error("Error registering user:", error);
+        throw new Error("Failed to register user. Please try again.");
+    }
+}

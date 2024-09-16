@@ -10,6 +10,7 @@ import DashSidebar from "./components/dashSidebar/DashSidebar";
 import WebHome from "./view/webPage/home/Home";
 import Login from "./view/webPage/login/Login"
 import Registration from "./view/webPage/registration/Registration";
+import NewUserPage from "./view/webPage/newuser/Newuser";
 // EMployee Dashboard
 import EmpHome from "./view/dashboard/employee/home/EmpHome"
 import EMPAddUsers from "./view/dashboard/employee/users/addusers/AddUsers";
@@ -93,7 +94,7 @@ const AppRoutes = () => {
                     path="/newuser"
                     element={
                         <LoginRegistrationLayOut>
-
+                            <NewUserPage />
                         </LoginRegistrationLayOut>
                     }
                 />

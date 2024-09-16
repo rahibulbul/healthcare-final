@@ -12,6 +12,10 @@ import Login from "./view/webPage/login/Login"
 import Registration from "./view/webPage/registration/Registration";
 // EMployee Dashboard
 import EmpHome from "./view/dashboard/employee/home/EmpHome"
+import EMPAddUsers from "./view/dashboard/employee/users/addusers/AddUsers";
+import EMPAllUsers from "./view/dashboard/employee/users/allusers/AllUsers";
+import EMPAwaitingUsers from "./view/dashboard/employee/users/awaitingusers/AwaitingUsers";
+import EMPUserCategory from "./view/dashboard/employee/users/userscategory/UserCategory";
 
 const WebPageLayOut = ({ children }) => {
     return (
@@ -99,15 +103,10 @@ const AppRoutes = () => {
                         <EmployeeDashLayout>
                             <Routes>
                                 <Route index element={<EmpHome />} />
-                                {/* <Route path="alluser" element={<UserList />} />
-                                <Route path="newuser" element={<NewUsers />} />
-                                <Route path="usercategory" element={<UserCategory />} />
-                                <Route path="awaitinguser" element={<AwaitingUser />} />
-                                <Route path="patientslist" element={<PatientList />} />
-                                <Route path="newpatients" element={<NewPatient />} />
-                                <Route path="awaitingpatients" element={<AwaitingPatient />} />
-                                <Route path="newappointments" element={<NewAppointments />} />
-                                <Route path="appointmentslist" element={<AppointmentList />} /> */}
+                                <Route path="allusers" element={<EMPAllUsers />} />
+                                <Route path="addusers" element={<EMPAddUsers />} />
+                                <Route path="userscategory" element={<EMPUserCategory />} />
+                                <Route path="awaitingusers" element={<EMPAwaitingUsers />} />
                             </Routes>
                         </EmployeeDashLayout>
                     }

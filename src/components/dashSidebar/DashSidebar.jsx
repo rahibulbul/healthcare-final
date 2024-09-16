@@ -76,7 +76,7 @@ const DashSidebar = () => {
                                     className={`flex items-center px-5 py-3 gap-4 text-base font-medium cursor-pointer duration-500 hover:bg-slate-300 hover:text-black hover:px-8
                                     ${isPathActive('/employee') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                 >
-                                    <i className="fa-solid fa-house"></i>
+                                    <i className="ph ph-house-simple"></i>
                                     <span>Employee</span>
                                 </Link>
                             </li>
@@ -94,13 +94,13 @@ const DashSidebar = () => {
                                 </div>
                                 <ul
                                     className={`overflow-hidden transition-all duration-500 ease-in-out
-                                    ${activeDropdown === 'users' || location.pathname.includes('/employee/user') ? 'max-h-96' : 'max-h-0'}`} // Smooth animation with height change
+                                    ${activeDropdown === 'users' || location.pathname.includes('/employee/users') ? 'max-h-96' : 'max-h-0'}`}
                                 >
                                     <li>
                                         <Link
-                                            to="/employee/alluser"
+                                            to="/employee/allusers"
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/alluser') ? 'bg-slate-300 text-black' : 'text-slate-500'}`} // Active background
+                                            ${isPathActive('/employee/allusers') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
                                             <i className="ph ph-dot"></i>
                                             <span>All users</span>
@@ -108,27 +108,27 @@ const DashSidebar = () => {
                                     </li>
                                     <li>
                                         <Link
-                                            to="/employee/adduser"
+                                            to="/employee/addusers"
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/adduser') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                            ${isPathActive('/employee/addusers') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
                                             <i className="ph ph-dot"></i>
                                             <span>Add users</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/employee/usercategory"
+                                        <Link to="/employee/userscategory"
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/usercategory') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                            ${isPathActive('/employee/userscategory') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
                                             <i className="ph ph-dot"></i>
                                             <span>Users category</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/employee/awaitinguser"
+                                        <Link to="/employee/awaitingusers"
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/awaitinguser') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                            ${isPathActive('/employee/awaitingusers') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
                                             <i className="ph ph-dot"></i>
                                             <span>Awaiting for verification</span>

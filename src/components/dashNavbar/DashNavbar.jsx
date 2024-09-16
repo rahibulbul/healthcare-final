@@ -37,13 +37,13 @@ const DashNavbar = () => {
     // const [activeLink, setactiveLink] = useState();
     const pathMap = {
         "/employee": "Dashboard",
-        "/employee/alluser": "All User",
-        "/employee/newuser": "New User",
-        "/employee/usercategory": "User Category",
-        "/employee/awaitinguser": "Awaiting User",
+        "/employee/allusers": "All User",
+        "/employee/addusers": "New User",
+        "/employee/userscategory": "User Category",
+        "/employee/awaitingusers": "Awaiting User",
     };
     const getPageName = (pathname) => {
-        return pathMap[pathname] || "404 Page not found";
+        return pathMap[pathname] || "Page not found";
     };
     const createBreadcrumb = (pathname) => {
         const pathSegments = pathname.split("/").filter(Boolean);

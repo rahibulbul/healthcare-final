@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [userName, setUserName] = useState("");
@@ -13,6 +13,7 @@ const Login = () => {
     const [isPasswordValid, setIsPasswordValid] = useState(false);
     const [passwordVisible, setPasswordVisible] = useState(false);
 
+    const navigate = useNavigate();
 
     const userNameValidate = (value) => {
         if (value.length === 0) {
@@ -65,6 +66,10 @@ const Login = () => {
         setPasswordVisible((prev) => !prev);
     }
 
+    const HandleLogin = () => {
+        navigate("/employee");
+    }
+
 
     return (
         <div className='relative w-full h-[calc(100vh-65px)] bg-white flex-col justify-center items-center flex'>
@@ -74,7 +79,7 @@ const Login = () => {
                 <span className='text-base font-semibold'>Please login to start your session</span>
             </div>
             <div className="relative">
-                <form className='relative'>
+                <form className='relative' onSubmit={HandleLogin}>
                     <div className="relative flex flex-col items-center">
                         <div
                             className="relative input w-72 md:w-96 mt-8 flex items-center"
@@ -83,7 +88,7 @@ const Login = () => {
                                 type="text"
                                 name="username"
                                 id="username"
-                                className='relative w-full border-4 border-slate-300 rounded-2xl py-3 px-5 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer'
+                                className='relative w-full border-2 border-slate-300 rounded-2xl py-3 px-5 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer'
                                 required
                                 value={userName}
                                 onChange={handleUserNameChange}
@@ -110,7 +115,7 @@ const Login = () => {
                                 type={passwordVisible ? "text" : "password"}
                                 name="username"
                                 id="username"
-                                className='relative w-full border-4 border-slate-300 rounded-2xl py-3 pl-5 pr-8 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer'
+                                className='relative w-full border-2 border-slate-300 rounded-2xl py-3 pl-5 pr-8 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer'
                                 required
                                 value={password}
                                 onBlur={handlePasswordBlur}
@@ -164,7 +169,7 @@ const Login = () => {
                         <input
                             type="submit"
                             value="Login"
-                            className='border-4 py-4 px-20 md:px-32 text-slate-500 rounded-3xl font-semibold text-2xl border-slate-300 cursor-pointer hover:border-black duration-500 hover:shadow-ui-bold hover:text-black'
+                            className='border-2 py-4 px-20 md:px-32 text-slate-500 rounded-3xl font-semibold text-2xl border-slate-300 cursor-pointer hover:border-black duration-500 hover:shadow-ui-bold hover:text-black'
                         />
                     </div>
                     <div className="loginLink flex items-center justify-between md:justify-center md:gap-5 mt-10">

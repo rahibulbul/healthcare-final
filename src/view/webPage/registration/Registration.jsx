@@ -438,7 +438,7 @@ const Registration = () => {
 
     return (
         <div
-            className='relative w-full mt-[70px] md:mt-0 md:h-[calc(100vh_-_70px)] bg-white flex-col justify-center items-center flex overflow-y-auto'
+            className='relative w-full mt-[100px] mb-20 md:mt-0 md:h-[calc(100vh_-_70px)] md:mb-0 bg-white flex-col justify-center items-center flex overflow-y-auto'
         >
             <div
                 className="relative flex flex-col items-center">
@@ -458,7 +458,7 @@ const Registration = () => {
                                     value={title}
                                     onChange={handleTitleChange}
                                     onBlur={handleTitleBlur}
-                                    className="relative w-full bg-white border-4 box-border border-slate-300 rounded-2xl py-3 px-5 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer"
+                                    className="relative w-full bg-white border-2 box-border border-slate-300 rounded-2xl py-3 px-5 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer"
                                 >
                                     <option value=""></option>
                                     <option value="Mr">Mr</option>
@@ -492,7 +492,7 @@ const Registration = () => {
                                     value={fullName}
                                     onChange={handleFullNameChange}
                                     onBlur={handleFullNameBlur}
-                                    className="relative w-full border-4 border-slate-300 rounded-2xl py-3 px-5 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer"
+                                    className="relative w-full border-2 border-slate-300 rounded-2xl py-3 px-5 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer"
                                 />
                                 <i className={`fa-solid fa-circle-exclamation absolute -right-7 text-lg text-red-500 ${fullNameError && isFullNameTouched ? "" : "hidden"}`} />
                                 <i className={`fa-solid fa-circle-check absolute -right-7 text-lg text-green-500 ${isFullNameValid ? "" : "hidden"}`} />
@@ -514,7 +514,7 @@ const Registration = () => {
                                     value={userName}
                                     onChange={handleUserNameChange}
                                     onBlur={handleUserNameBlur}
-                                    className="relative w-full border-4 border-slate-300 rounded-2xl py-3 px-5 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer"
+                                    className="relative w-full border-2 border-slate-300 rounded-2xl py-3 px-5 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer"
                                 />
                                 <i className={`fa-solid fa-circle-exclamation absolute -right-7 text-lg text-red-500 ${userNameError && isUserNameTouched ? "" : "hidden"}`} />
                                 <i className={`fa-solid fa-circle-check absolute -right-7 text-lg text-green-500 ${isUserNameValid ? "" : "hidden"}`} />
@@ -538,7 +538,7 @@ const Registration = () => {
                                     value={email}
                                     onChange={handleEmailChange}
                                     onBlur={handleEmailBlur}
-                                    className="relative w-full border-4 border-slate-300 rounded-2xl py-3 px-5 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer"
+                                    className="relative w-full border-2 border-slate-300 rounded-2xl py-3 px-5 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer"
                                 />
                                 <i className={`fa-solid fa-circle-exclamation absolute -right-7 text-lg text-red-500 ${emailError && isEmailTouched ? "" : "hidden"}`} />
                                 <i className={`fa-solid fa-circle-check absolute -right-7 text-lg text-green-500 ${isEmailValid ? "" : "hidden"}`} />
@@ -561,7 +561,7 @@ const Registration = () => {
                                     max={today}
                                     onChange={handleDobChange}
                                     onBlur={handleDobBlur}
-                                    className={`relative w-full border-4 bg-white border-slate-300 cursor-pointer rounded-2xl py-3 px-5 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer ${isIOS() ? 'py-7 px-5' : 'py-3 px-5'}`}
+                                    className={`relative w-full border-2 bg-white border-slate-300 cursor-pointer rounded-2xl py-3 px-5 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer ${isIOS() ? 'py-7 px-5' : 'py-3 px-5'}`}
                                 />
                                 <i className={`fa-solid fa-circle-exclamation absolute -right-7 text-lg text-red-500 ${dobError && isDobTouched ? "" : "hidden"}`} />
                                 <i className={`fa-solid fa-circle-check absolute -right-7 text-lg text-green-500 ${isDobValid ? "" : "hidden"}`} />
@@ -584,7 +584,7 @@ const Registration = () => {
                                     value={userCategory}
                                     onChange={handleUserCategoryChange}
                                     onBlur={handleUserCategoryBlur}
-                                    className="relative w-full border-4 bg-white border-slate-300 cursor-pointer rounded-2xl py-3 px-5 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer"
+                                    className="relative w-full border-2 bg-white border-slate-300 cursor-pointer rounded-2xl py-3 px-5 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer"
                                 >
                                     <option value=""></option>
                                     {/* {categories.map((category) => (
@@ -611,7 +611,7 @@ const Registration = () => {
                                         type={passwordVisible ? "text" : "password"}
                                         name="password"
                                         id="password"
-                                        className='relative w-full border-4 border-slate-300 rounded-2xl py-3 pl-5 pr-8 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer'
+                                        className='relative w-full border-2 border-slate-300 rounded-2xl py-3 pl-5 pr-8 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer'
                                         required
                                         value={password}
                                         onBlur={handlePasswordBlur}
@@ -664,7 +664,7 @@ const Registration = () => {
                                         type={ConfirmPasswordVisible ? "text" : "password"}
                                         name="confirm_password"
                                         id="confirm_password"
-                                        className='relative w-full border-4 border-slate-300 rounded-2xl py-3 pl-5 pr-8 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer'
+                                        className='relative w-full border-2 border-slate-300 rounded-2xl py-3 pl-5 pr-8 font-semibold outline-none focus:border-slate-700 focus:shadow-ui-bold valid:border-slate-700 duration-500 peer'
                                         required
                                         value={confirmPassword}
                                         onBlur={handleConfirmPasswordBlur}

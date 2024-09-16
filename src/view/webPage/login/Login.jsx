@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { UserLogin } from "../../../model/userHandle";
+import { ToastContainer, toast, Slide } from 'react-toastify';
 
 const Login = () => {
     const [userName, setUserName] = useState("");
@@ -12,6 +14,8 @@ const Login = () => {
     const [isPasswordTouched, setIsPasswordTouched] = useState(false);
     const [isPasswordValid, setIsPasswordValid] = useState(false);
     const [passwordVisible, setPasswordVisible] = useState(false);
+
+    const [errors, setErrors] = useState({ username: false, password: false });
 
     const navigate = useNavigate();
 
@@ -66,20 +70,64 @@ const Login = () => {
         setPasswordVisible((prev) => !prev);
     }
 
-    const HandleLogin = () => {
-        navigate("/employee");
-    }
 
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        if (!userName) {
+            setErrors((prev) => ({ ...prev, username: true }));
+        } else if (!password) {
+            setErrors((prev) => ({ ...prev, password: true }));
+        } else {
+            const result = await UserLogin(userName, password);
+            if (result.success) {
+                const userData = result.data;
+                sessionStorage.setItem("userData", JSON.stringify(userData));
+                toast.success("Login successful . . .");
+                console.log("UserData pushed");
+                console.log("UserData stored in sessionStorage:", sessionStorage.getItem("userData"));
+
+
+                setTimeout(() => {
+                    switch (userData.usercategory) {
+                        case "employee":
+                            navigate("/employee");
+                            break;
+                        default:
+                            navigate("/user");
+                            toast.error("Login Failed! Try again")
+                            break;
+                    }
+                }, 1000);
+            } else {
+                toast.warning("Please check username and password again.")
+                setErrors((prev) => ({ ...prev, password: true }));
+            }
+        }
+    }
 
     return (
         <div className='relative w-full h-[calc(100vh-65px)] bg-white flex-col justify-center items-center flex'>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+                transition={Slide}
+            />
             <div
                 className="relative flex flex-col items-center">
                 <span className='text-3xl font-bold'>Welcome Back!</span>
                 <span className='text-base font-semibold'>Please login to start your session</span>
             </div>
             <div className="relative">
-                <form className='relative' onSubmit={HandleLogin}>
+                <form className='relative' onSubmit={handleLogin}>
                     <div className="relative flex flex-col items-center">
                         <div
                             className="relative input w-72 md:w-96 mt-8 flex items-center"

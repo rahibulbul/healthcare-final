@@ -119,3 +119,31 @@ export const UserRegistration = async (userData, userCategory, year, month, week
         throw new Error("Failed to register user. Please try again.");
     }
 }
+export const UserLogin = async (userName, password) => {
+    try {
+        const usersRef = ref(database, "users/user/");
+        const usersSnapshot = await get(usersRef);
+        let userData = null;
+        if (usersSnapshot.exists()) {
+            usersSnapshot.forEach((childSnapshot) => {
+                const data = childSnapshot.val();
+                if (data.username === userName) {
+                    if (data.password === password) {
+                        userData = {
+                            ...data,
+                            userID: childSnapshot.key,
+                        };
+                    }
+                }
+            });
+        }
+        if (userData) {
+            return { success: true, data: userData };
+        } else {
+            return { success: false, message: "Incorrect username or password." };
+        }
+    } catch (error) {
+        console.error("Error during login:", error.message);
+        return { success: false, message: "Login failed due to an error." };
+    }
+};

@@ -151,6 +151,13 @@ const EMPUserCategory = () => {
     // Handle row update in Firebase
     const processRowUpdate = async (updatedRow, oldRow) => {
         try {
+            // Check if the updated user category already exists in the database
+            const isUserCategoryTaken = await CheckUserCategory(updatedRow.usercategory);
+            if (isUserCategoryTaken && updatedRow.usercategory !== oldRow.usercategory) {
+                toast.error('User category already exists. Please choose a different name.');
+                return oldRow; // Return the old row without saving the changes
+            }
+
             const updates = {};
             updates[`users/userscategory/${updatedRow.id}`] = {
                 usercategory: updatedRow.usercategory,
@@ -160,30 +167,21 @@ const EMPUserCategory = () => {
 
             await update(ref(database), updates);
             toast.success('Category updated successfully');
-            return updatedRow;
+            return updatedRow; // Return the updated row if no duplicates found
         } catch (error) {
             toast.error('Error updating category');
             return oldRow;
         }
     };
 
+
     const handleProcessRowUpdateError = (error) => {
         toast.error('Error updating row: ' + error.message);
     };
 
-    // Handle delete row
-    // const handleDeleteClick = async (id) => {
-    //     try {
-    //         await remove(ref(database, `users/userscategory/${id}`));
-    //         setUserCategories((prev) => prev.filter((row) => row.id !== id));
-    //         toast.success('Category deleted successfully');
-    //     } catch (error) {
-    //         toast.error('Failed to delete category');
-    //     }
-    // };
     const handleDeleteClick = async (id) => {
         try {
-            await DeleteUserCategory(id);  // Call the DeleteUserCategory function
+            await remove(ref(database, `users/userscategory/${id}`));
             setUserCategories((prev) => prev.filter((row) => row.id !== id));
             toast.success('Category deleted successfully');
         } catch (error) {
@@ -344,3 +342,4 @@ const EMPUserCategory = () => {
 };
 
 export default EMPUserCategory;
+

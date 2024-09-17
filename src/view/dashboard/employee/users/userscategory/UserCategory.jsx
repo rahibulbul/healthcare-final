@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid, GridActionsCellItem, GridRowModes } from '@mui/x-data-grid';
 import { ToastContainer, toast, Slide } from 'react-toastify';
-import { AddUserCategory, CheckUserCategory, FetchUserCategory, DeleteUserCategory } from "../../../../../model/userHandle";
+import { AddUserCategory, CheckUserCategory, FetchUserCategory } from "../../../../../model/userHandle";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import SaveIcon from '@mui/icons-material/Save';
@@ -10,17 +10,20 @@ import { database } from '../../../../../model/firebaseConfig';
 import { ref, update, remove } from 'firebase/database';
 
 const EMPUserCategory = () => {
-    const [userCategories, setUserCategories] = useState([]);
-    const [rowModesModel, setRowModesModel] = useState({});
     const [userCategory, setUserCategory] = useState("");
     const [userCategoryError, setUserCategoryError] = useState("");
     const [isUserCategoryTouched, setIsUserCategoryTouched] = useState(false);
     const [isUserCategoryValid, setIsUserCategoryValid] = useState(false);
+
     const [userCategoryInfo, setUserCategoryInfo] = useState("");
     const [userCategoryInfoError, setUserCategoryInfoError] = useState("");
     const [isUserCategoryInfoTouched, setIsUserCategoryInfoTouched] = useState(false);
     const [isUserCategoryInfoValid, setIsUserCategoryInfoValid] = useState(false);
+
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const [userCategories, setUserCategories] = useState([]);
+    const [rowModesModel, setRowModesModel] = useState({});
 
     useEffect(() => {
         const unsubscribe = FetchUserCategory((fetchedCategories) => {

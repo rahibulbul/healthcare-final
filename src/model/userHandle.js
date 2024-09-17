@@ -147,3 +147,34 @@ export const UserLogin = async (userName, password) => {
         return { success: false, message: "Login failed due to an error." };
     }
 };
+
+export const FetchUsers = (callback) => {
+    const usersRef = ref(database, "users/user/");
+    const unsubscribe = onValue(usersRef, (snapshot) => {
+        const usersData = snapshot.val();
+        if (usersData) {
+            const formattedUsers = Object.keys(usersData).map((key) => ({
+                id: key,
+                ...usersData[key],
+            }))
+            callback(formattedUsers);
+        } else {
+            callback([]);
+        }
+    });
+    return unsubscribe;
+}
+
+
+export const LoginUserData = async () => {
+    const userData = JSON.parse(sessionStorage.getItem("userData"));
+
+    if (userData && userData.fullname) {
+        console.log("User full name retrieved:", userData.fullname);
+        const { password, ...filteredUserData } = userData;
+        return filteredUserData;
+    } else {
+        console.error("User data or full name is missing from sessionStorage");
+        return null;
+    }
+};

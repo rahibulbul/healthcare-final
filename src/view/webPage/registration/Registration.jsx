@@ -585,7 +585,8 @@ const Registration = () => {
                             phone: ""
                         }
                     ],
-                    accountstatus: "verifying",
+                    accountstatus: "awaiting verifying",
+                    lastUpdated: Date.now(),
                 };
                 const UserID = await UserRegistration(userData, userCategory, year, month, week, userPrefix);
 

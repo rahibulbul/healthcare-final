@@ -1,7 +1,6 @@
-
-
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, Navigate, useLocation } from 'react-router-dom';
+import { ToastContainer, toast, Slide } from 'react-toastify';
 
 const DashSidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -41,10 +40,29 @@ const DashSidebar = () => {
         };
     }, [sidebarRef]);
 
-    const isPathActive = (path) => location.pathname === path; // Function to check active path
-
+    const isPathActive = (path) => location.pathname === path;
+    const handleLogout = () => {
+        toast.success("Logging out from this session . . .");
+        sessionStorage.removeItem("userData");
+        setTimeout(() => {
+            Navigate("/");
+        }, 2000);
+    };
     return (
         <>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+                transition={Slide}
+            />
             <div
                 ref={iconRef}
                 className="md:hidden absolute left-5 cursor-pointer z-50"
@@ -261,7 +279,7 @@ const DashSidebar = () => {
                             </li>
                             <li>
                                 <Link
-                                    to="#"
+                                    onClick={handleLogout}
                                     className='flex items-center px-5 py-3 gap-4 text-base font-medium cursor-pointer duration-500 text-slate-500 hover:bg-slate-300 hover:text-black hover:px-8'
                                 >
                                     <i className='bx bx-log-out-circle'></i>

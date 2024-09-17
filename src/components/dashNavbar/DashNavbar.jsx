@@ -2,11 +2,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Icon } from '@iconify/react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { LoginUserData } from "../../model/userHandle";
+import { ToastContainer, toast, Slide } from 'react-toastify';
 
 const DashNavbar = () => {
     const [isPanelOpen, setIsPanelOpen] = useState(false);
     const panelRef = useRef(null);
     const iconRef = useRef(null);
+    const [isCopied, setIsCopied] = useState(false);
 
     const handleIconClick = () => {
         setIsPanelOpen((prev) => !prev);
@@ -29,12 +32,28 @@ const DashNavbar = () => {
         };
     }, [panelRef]);
 
+    const handleCopy = () => {
+        if (userData && userData.username) {
+            navigator.clipboard.writeText(userData.username).then(() => {
+                setIsCopied(true);
+                setTimeout(() => {
+                    setIsCopied(false);
+                }, 10000);
+            });
+        }
+    };
+
+
     const navigate = useNavigate();
     const handleLogout = () => {
-        navigate("/"); // Navigates to the root path
+        toast.success("Logging out from this session . . .");
+        sessionStorage.removeItem("userData");
+        setTimeout(() => {
+            navigate("/");
+        }, 2000);
     };
+
     // Breadcrumb
-    // const [activeLink, setactiveLink] = useState();
     const pathMap = {
         "/employee": "Dashboard",
         "/employee/allusers": "All User",
@@ -49,15 +68,12 @@ const DashNavbar = () => {
         const pathSegments = pathname.split("/").filter(Boolean);
         return pathSegments.map((segment, index) => {
             const path = `/${pathSegments.slice(0, index + 1).join("/")}`;
-            const isActive = path === location.pathname; // Check if the current path matches
+            const isActive = path === location.pathname;
             return (
                 <span key={path}>
                     <Link
                         to={path}
-                        // className={`text-base font-medium text-slate-700 hover:bg-slate-700 hover:text-white duration-500 rounded-md p-2 ${isActive ? "bg-slate-700 text-white" : ""
-                        //     }`}
                         className={`text-base font-medium ${isActive ? "bg-slate-700 text-white" : "text-slate-700"} hover:bg-slate-700 hover:text-white duration-500 rounded-md p-2`}
-
                     >
                         {getPageName(path)}
                     </Link>
@@ -68,18 +84,41 @@ const DashNavbar = () => {
     };
 
     const handleBreadCrumbIconClick = () => {
-        sessionStorage.removeItem("userData");
-        setTimeout(() => {
-            navigate("/");
-        }, 100);
+        navigate("/employee");
+
     }
     const location = useLocation();
     const currentPath = location.pathname;
     const breadcrumb = createBreadcrumb(currentPath);
 
+    const [userData, setUserData] = useState(null);
 
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await LoginUserData();
+            if (data) {
+                setUserData(data);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    if (!userData) {
+        return <div>Loading...</div>;
+    }
     return (
         <header className='relative w-full h-16 shadow-ui-perfect flex justify-between items-center px-10'>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                closeOnClick
+                pauseOnHover
+                theme="colored"
+                transition={Slide}
+            />
             {/* Breadcrumb section, hidden on md and smaller screens */}
             <div className="flex-grow">
                 <div className="hidden md:flex flex-row items-center">
@@ -106,14 +145,19 @@ const DashNavbar = () => {
                         className="absolute user-panel top-full w-[300px] h-auto bg-white right-0 shadow-ui-bold z-50"
                     >
                         <div className="flex flex-col border-b-2 p-5">
-                            <span className='text-2xl font-medium mb-1 text-slate-700'>Full Name</span>
-                            <span className='text-sm font-medium text-slate-600'>User Type</span>
+                            <span className='text-2xl font-semibold mb-1 text-slate-700'>{userData.fullname}</span>
+                            <span className='text-base font-semibold text-slate-600'>{userData.usercategory}</span>
+                            <div className="flex items-center gap-1">
+                                <span className='text-sm font-medium text-slate-600'>@{userData.username}</span>
+                                {!isCopied && <i className='ph ph-copy cursor-pointer' onClick={handleCopy}></i>}
+                                {isCopied && <i className='fa-solid fa-check-circle text-green-500'></i>}
+                            </div>
                         </div>
                         <div className="flex flex-col">
                             <Link to="" className='flex p-3 flex-row items-center cursor-pointer hover:bg-slate-300 hover:pl-6 duration-300 text-gray-600 hover:text-black'><Icon icon="ph:bell-bold" className='mr-3' />Notification</Link>
                             <Link to="" className='flex p-3 flex-row items-center cursor-pointer hover:bg-slate-300 hover:pl-6 duration-300 text-gray-600 hover:text-black'><Icon icon="ph:gear-bold" className='mr-3' />Profile settings</Link>
                             <Link to="" className='flex p-3 flex-row items-center cursor-pointer hover:bg-slate-300 hover:pl-6 duration-300 text-gray-600 hover:text-black'><Icon icon="ph:lock-bold" className='mr-3' />Security and privacy</Link>
-                            <Link to="/" className='flex p-3 flex-row items-center cursor-pointer hover:bg-slate-300 hover:pl-6 duration-300 text-gray-600 hover:text-black'><Icon icon="ri:logout-circle-r-line" className='mr-3' />Logout</Link>
+                            <Link onClick={handleLogout} className='flex p-3 flex-row items-center cursor-pointer hover:bg-slate-300 hover:pl-6 duration-300 text-gray-600 hover:text-black'><Icon icon="ri:logout-circle-r-line" className='mr-3' />Logout</Link>
                         </div>
                     </div>
                 )}

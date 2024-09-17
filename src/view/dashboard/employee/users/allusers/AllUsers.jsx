@@ -18,7 +18,6 @@ const EMPAllUsers = () => {
         { field: 'id', headerName: 'User ID', width: 120 },
         { field: 'fullname', headerName: 'Full Name', flex: 1, editable: true },
         { field: 'username', headerName: 'User Name', width: 120, editable: true },
-        { field: 'email', headerName: 'Email', flex: 1, editable: true },
         { field: 'dob', headerName: 'Date of birth', width: 110, editable: true, renderCell: (params) => new Date(params.value).toLocaleDateString(), },
         { field: 'phonenumber', headerName: 'Phone number', width: 130, editable: true },
         { field: 'insurancestatus', headerName: 'Insurance Status', width: 140, editable: true },

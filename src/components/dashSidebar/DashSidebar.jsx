@@ -259,7 +259,7 @@ const DashSidebar = () => {
                                             ${isPathActive('/employee/awaitinginsurance') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
                                             <i className="ph ph-dot"></i>
-                                            <span>Awaiting for insurance</span>
+                                            <span>Awaiting for verification</span>
                                         </Link>
                                     </li>
                                 </ul>
@@ -299,12 +299,147 @@ const DashSidebar = () => {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/employee/awaitingappointment"
+                                        <Link to="/employee/awaitingappointments"
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/awaitingappointment') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                            ${isPathActive('/employee/awaitingappointments') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
                                             <i className="ph ph-dot"></i>
                                             <span>Awaiting for appointment</span>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div
+                                    className='flex items-center px-5 py-3 gap-4 text-base font-medium cursor-pointer duration-500 text-slate-500 hover:bg-slate-300 hover:text-black hover:px-8'
+                                    onClick={() => toggleDropdown('investors')}
+                                >
+                                    <i className="ph ph-coins"></i>
+                                    <span>Investors</span>
+                                    <i
+                                        className={`fa-solid fa-sort-down absolute right-3 transition-transform duration-300 ease-in-out
+                                        ${activeDropdown === 'investors' ? 'rotate-180' : ''}`}
+                                    ></i>
+                                </div>
+                                <ul
+                                    className={`overflow-hidden transition-all duration-500 ease-in-out
+                                    ${activeDropdown === 'investors' || location.pathname.includes('/employee/investors') ? 'max-h-96' : 'max-h-0'}`}
+                                >
+                                    <li>
+                                        <Link to="/employee/allinvestors"
+                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
+                                            ${isPathActive('/employee/allinvestors') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                        >
+                                            <i className="ph ph-dot"></i>
+                                            <span>All investors</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/employee/addinvestors"
+                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
+                                            ${isPathActive('/employee/addinvestors') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                        >
+                                            <i className="ph ph-dot"></i>
+                                            <span>Add investors</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/employee/awaitinginvestors"
+                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
+                                            ${isPathActive('/employee/awaitinginvestors') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                        >
+                                            <i className="ph ph-dot"></i>
+                                            <span>Awaiting for verification</span>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div
+                                    className='flex items-center px-5 py-3 gap-4 text-base font-medium cursor-pointer duration-500 text-slate-500 hover:bg-slate-300 hover:text-black hover:px-8'
+                                    onClick={() => toggleDropdown('bills')}
+                                >
+                                    <i className="ph ph-credit-card"></i>
+                                    <span>Bills and expense</span>
+                                    <i
+                                        className={`fa-solid fa-sort-down absolute right-3 transition-transform duration-300 ease-in-out
+                                        ${activeDropdown === 'bills' ? 'rotate-180' : ''}`}
+                                    ></i>
+                                </div>
+                                <ul
+                                    className={`overflow-hidden transition-all duration-500 ease-in-out
+                                    ${activeDropdown === 'bills' || location.pathname.includes('/employee/bills') ? 'max-h-96' : 'max-h-0'}`}
+                                >
+                                    <li>
+                                        <Link to="/employee/allbills"
+                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
+                                            ${isPathActive('/employee/allbills') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                        >
+                                            <i className="ph ph-dot"></i>
+                                            <span>All bills</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/employee/allexpense"
+                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
+                                            ${isPathActive('/employee/allexpense') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                        >
+                                            <i className="ph ph-dot"></i>
+                                            <span>All expense</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/employee/addbills"
+                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
+                                            ${isPathActive('/employee/addbills') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                        >
+                                            <i className="ph ph-dot"></i>
+                                            <span>Create bills</span>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div
+                                    className='flex items-center px-5 py-3 gap-4 text-base font-medium cursor-pointer duration-500 text-slate-500 hover:bg-slate-300 hover:text-black hover:px-8'
+                                    onClick={() => toggleDropdown('reports')}
+                                >
+                                    <i className="ph ph-clipboard-text"></i>
+                                    <span>Reports</span>
+                                    <i
+                                        className={`fa-solid fa-sort-down absolute right-3 transition-transform duration-300 ease-in-out
+                                        ${activeDropdown === 'reports' ? 'rotate-180' : ''}`}
+                                    ></i>
+                                </div>
+                                <ul
+                                    className={`overflow-hidden transition-all duration-500 ease-in-out
+                                    ${activeDropdown === 'reports' || location.pathname.includes('/employee/reports') ? 'max-h-96' : 'max-h-0'}`}
+                                >
+                                    <li>
+                                        <Link to="/employee/reports"
+                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
+                                            ${isPathActive('/employee/reports') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                        >
+                                            <i className="ph ph-dot"></i>
+                                            <span>All reports</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/employee/allexpense"
+                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
+                                            ${isPathActive('/employee/allexpense') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                        >
+                                            <i className="ph ph-dot"></i>
+                                            <span>All expense</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/employee/addbills"
+                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
+                                            ${isPathActive('/employee/addbills') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                        >
+                                            <i className="ph ph-dot"></i>
+                                            <span>Create bills</span>
                                         </Link>
                                     </li>
                                 </ul>
@@ -345,7 +480,7 @@ const DashSidebar = () => {
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     );
 };

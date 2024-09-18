@@ -120,7 +120,7 @@ const DashSidebar = () => {
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/employee/allemployees') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>All employees</span>
                                         </Link>
                                     </li>
@@ -130,7 +130,7 @@ const DashSidebar = () => {
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/employee/addemployees') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>Add employees</span>
                                         </Link>
                                     </li>
@@ -139,16 +139,16 @@ const DashSidebar = () => {
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/employee/employeesrole') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>Employees Roles</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/employee/awaitingemployees"
+                                        <Link to="/employee/verifyemployees"
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/awaitingemployees') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                            ${isPathActive('/employee/verifyemployees') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>Awaiting for verification</span>
                                         </Link>
                                     </li>
@@ -176,7 +176,7 @@ const DashSidebar = () => {
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/employee/allusers') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>All users</span>
                                         </Link>
                                     </li>
@@ -186,7 +186,7 @@ const DashSidebar = () => {
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/employee/addusers') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>Add users</span>
                                         </Link>
                                     </li>
@@ -195,16 +195,16 @@ const DashSidebar = () => {
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/employee/userscategory') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>Users category</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/employee/awaitingusers"
+                                        <Link to="/employee/verifyusers"
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/awaitingusers') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                            ${isPathActive('/employee/verifyusers') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>Awaiting for verification</span>
                                         </Link>
                                     </li>
@@ -231,7 +231,7 @@ const DashSidebar = () => {
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/employee/allinsurance') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>All insurance</span>
                                         </Link>
                                     </li>
@@ -240,7 +240,7 @@ const DashSidebar = () => {
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/employee/addinsurance') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>Add insurance</span>
                                         </Link>
                                     </li>
@@ -249,16 +249,16 @@ const DashSidebar = () => {
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/employee/insurancecategory') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>Insurance category</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/employee/awaitinginsurance"
+                                        <Link to="/employee/verifyinsurance"
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/awaitinginsurance') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                            ${isPathActive('/employee/verifyinsurance') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>Awaiting for verification</span>
                                         </Link>
                                     </li>
@@ -285,7 +285,7 @@ const DashSidebar = () => {
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/employee/allappointment') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>All appointment</span>
                                         </Link>
                                     </li>
@@ -294,16 +294,16 @@ const DashSidebar = () => {
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/employee/addappointment') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>Add appointment</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/employee/awaitingappointments"
+                                        <Link to="/employee/verifyappointments"
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/awaitingappointments') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                            ${isPathActive('/employee/verifyappointments') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>Awaiting for appointment</span>
                                         </Link>
                                     </li>
@@ -330,7 +330,7 @@ const DashSidebar = () => {
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/employee/allinvestors') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>All investors</span>
                                         </Link>
                                     </li>
@@ -339,7 +339,7 @@ const DashSidebar = () => {
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/employee/addinvestors') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>Add investors</span>
                                         </Link>
                                     </li>
@@ -348,7 +348,7 @@ const DashSidebar = () => {
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/employee/awaitinginvestors') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>Awaiting for verification</span>
                                         </Link>
                                     </li>
@@ -375,7 +375,7 @@ const DashSidebar = () => {
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/employee/allbills') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>All bills</span>
                                         </Link>
                                     </li>
@@ -384,7 +384,7 @@ const DashSidebar = () => {
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/employee/allexpense') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>All expense</span>
                                         </Link>
                                     </li>
@@ -393,8 +393,17 @@ const DashSidebar = () => {
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/employee/addbills') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
+                                            <i className="ph ph-dot-outline"></i>
                                             <span>Create bills</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/employee/verifybills"
+                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
+                                            ${isPathActive('/employee/verifybills') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                        >
+                                            <i className="ph ph-dot-outline"></i>
+                                            <span>Awaiting bills</span>
                                         </Link>
                                     </li>
                                 </ul>
@@ -402,70 +411,116 @@ const DashSidebar = () => {
                             <li>
                                 <div
                                     className='flex items-center px-5 py-3 gap-4 text-base font-medium cursor-pointer duration-500 text-slate-500 hover:bg-slate-300 hover:text-black hover:px-8'
-                                    onClick={() => toggleDropdown('reports')}
+                                    onClick={() => toggleDropdown('report')}
                                 >
                                     <i className="ph ph-clipboard-text"></i>
                                     <span>Reports</span>
                                     <i
                                         className={`fa-solid fa-sort-down absolute right-3 transition-transform duration-300 ease-in-out
-                                        ${activeDropdown === 'reports' ? 'rotate-180' : ''}`}
+                                        ${activeDropdown === 'report' ? 'rotate-180' : ''}`}
                                     ></i>
                                 </div>
                                 <ul
                                     className={`overflow-hidden transition-all duration-500 ease-in-out
-                                    ${activeDropdown === 'reports' || location.pathname.includes('/employee/reports') ? 'max-h-96' : 'max-h-0'}`}
+                                    ${activeDropdown === 'report' || location.pathname.includes('/employee/report') ? 'max-h-96' : 'max-h-0'}`}
                                 >
                                     <li>
-                                        <Link to="/employee/reports"
+                                        <Link to="/employee/companyreport"
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/reports') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                            ${isPathActive('/employee/companyreport') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
-                                            <span>All reports</span>
+                                            <i className="ph ph-dot-outline"></i>
+                                            <span>Company reports</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/employee/allexpense"
+                                        <Link to="/employee/userreport"
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/allexpense') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                            ${isPathActive('/employee/userreport') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
-                                            <span>All expense</span>
+                                            <i className="ph ph-dot-outline"></i>
+                                            <span>Users reports</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/employee/addbills"
+                                        <Link to="/employee/employeereport"
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/addbills') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                            ${isPathActive('/employee/employeereport') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
-                                            <i className="ph ph-dot"></i>
-                                            <span>Create bills</span>
+                                            <i className="ph ph-dot-outline"></i>
+                                            <span>Employees reports</span>
                                         </Link>
                                     </li>
+                                    <li>
+                                        <Link to="/employee/employeesalaryreport"
+                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
+                                            ${isPathActive('/employee/employeesalaryreport') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                        >
+                                            <i className="ph ph-dot-outline"></i>
+                                            <span>Employee Salary</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/employee/insurancereport"
+                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
+                                            ${isPathActive('/employee/insurancereport') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                        >
+                                            <i className="ph ph-dot-outline"></i>
+                                            <span>Insurance reports</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/employee/appointmentsreport"
+                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
+                                            ${isPathActive('/employee/appointmentsreport') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                        >
+                                            <i className="ph ph-dot-outline"></i>
+                                            <span>Appointments reports</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/employee/investorsreport"
+                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
+                                            ${isPathActive('/employee/investorsreport') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                        >
+                                            <i className="ph ph-dot-outline"></i>
+                                            <span>Investors reports</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/employee/billsandexpensereport"
+                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
+                                            ${isPathActive('/employee/billsandexpensereport') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                        >
+                                            <i className="ph ph-dot-outline"></i>
+                                            <span>All bills and Expenses</span>
+                                        </Link>
+                                    </li>
+
                                 </ul>
                             </li>
                         </ul>
                     </div>
-                    <div className="">
+                    <div className="mt-10">
                         <ul>
                             <li>
                                 <Link
-                                    to="/appsettings"
+                                    to="/employee/profilesettings"
                                     className={`flex items-center px-5 py-3 gap-4 text-base font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-8
-                                    ${isPathActive('/appsettings') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                    ${isPathActive('/employee/profilesettings') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                 >
-                                    <i className="ph ph-gear"></i>
-                                    <span>App settings</span>
+                                    <i className="ph ph-user-gear"></i>
+                                    <span>Profile settings</span>
                                 </Link>
                             </li>
                             <li>
                                 <Link
-                                    to="/profilesettings"
+                                    to="/employee/security"
                                     className={`flex items-center px-5 py-3 gap-4 text-base font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-8
-                                    ${isPathActive('/profilesettings') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                    ${isPathActive('/employee/security') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                 >
-                                    <i className="ph ph-user-gear"></i>
-                                    <span>Profile settings</span>
+                                    <i className="ph ph-lock"></i>
+                                    <span>Security and privacy</span>
                                 </Link>
                             </li>
                             <li>

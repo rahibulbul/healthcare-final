@@ -2,47 +2,48 @@ import { useEffect, useState } from 'react';
 import { database } from './firebaseConfig';
 import { child, equalTo, get, onValue, orderByChild, query, ref, remove, set, update } from "firebase/database";
 
-// export const fetchEmployeeRole = async () => {
-//     try {
-//         const employeeRolesRef = ref(database, 'company/employeeroles');
 
-//         const snapshot = await get(employeeRolesRef);
-
-//         if (snapshot.exists()) {
-//             const rolesData = snapshot.val();
-
-//             // Extract only the role names (assuming each role object has a 'name' field)
-//             const roleNames = Object.values(rolesData).map(role => role.name);
-//             return roleNames;
-//         } else {
-//             console.log("No employee roles data available");
-//             return [];
-//         }
-//     } catch (error) {
-//         console.error("Error fetching employee roles: ", error);
-//         return [];
-//     }
-// };
-export const fetchEmployeeRole = async () => {
+export const AddEmployeeRoles = async (roleData) => {
     try {
-        const employeeRolesRef = ref(database, 'company/employeeroles');
-
-        const snapshot = await get(employeeRolesRef);
-
-        if (snapshot.exists()) {
-            const rolesData = snapshot.val(); // Get the raw data
-
-            // Convert the object (rolesData) into an array of role objects
-            return Object.keys(rolesData).map(id => ({
-                id, // Include the ID as part of each role
-                ...rolesData[id] // Spread the rest of the role data (name and permissions)
-            }));
-        } else {
-            console.log("No employee roles data available");
-            return [];
+        const EmployeeRolesRef = ref(database, 'company/counters/employeerole');
+        const RoleCountSnapShot = await get(EmployeeRolesRef)
+        let count = 1;
+        if (RoleCountSnapShot.exists) {
+            count = RoleCountSnapShot.val() + 1;
         }
+        const RoleID = `${count.toString().padStart(2, "0")}`;
+        await set(ref(database, `company/employeeroles/` + RoleID), roleData)
+        await set(EmployeeRolesRef, count);
+        return RoleID;
     } catch (error) {
-        console.error("Error fetching employee roles: ", error);
-        return [];
+        console.error("Error registering role:", error);
+        throw new Error("Failed to register role. Please try again.");
     }
+}
+
+
+export const updateRoleInDatabase = async (RoleID, updatedRoleData) => {
+    if (Object.keys(updatedRoleData).length === 0) return; // No changes to update
+
+    const roleRef = ref(database, `company/employeeroles/${RoleID}`);
+    await update(roleRef, updatedRoleData);
+};
+
+export const fetchEmployeeRoles = (setRoles) => {
+    const rolesRef = ref(database, 'company/employeeroles');
+
+    onValue(rolesRef, (snapshot) => {
+        const rolesData = snapshot.val();
+        if (rolesData) {
+            // Map over roles and ensure the object structure is correct
+            const rolesArray = Object.keys(rolesData).map(key => ({
+                id: key,  // Store the role's ID
+                roleName: rolesData[key].roleName,  // Ensure roleName is accessed properly
+                permissions: rolesData[key].permissions || {}
+            }));
+            setRoles(rolesArray);  // Set roles in the state
+        } else {
+            setRoles([]);  // No roles found
+        }
+    });
 };

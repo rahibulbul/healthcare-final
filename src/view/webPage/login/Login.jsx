@@ -94,7 +94,7 @@ const Login = () => {
                             navigate("/employee");
                             break;
                         default:
-                            navigate("/user");
+                            navigate("/users");
                             toast.error("Login Failed! Try again")
                             break;
                     }

@@ -6,17 +6,26 @@ import ScrollToTop from "./ScrollToTop";
 import WebNavbar from "./components/webNavbar/WebNavbar";
 import DashNavbar from "./components/dashNavbar/DashNavbar";
 import DashSidebar from "./components/dashSidebar/DashSidebar";
+import UserDashSidebar from "./components/userDashSidebar/userDashSidebar";
+import UserDashNavbar from "./components/userDashNavbar/UserDashNavbar"
+
 // Web Page
 import WebHome from "./view/webPage/home/Home";
 import Login from "./view/webPage/login/Login"
 import Registration from "./view/webPage/registration/Registration";
 import NewUserPage from "./view/webPage/newuser/Newuser";
-// EMployee Dashboard
+
+// Employee Dashboard
 import EmpHome from "./view/dashboard/employee/home/EmpHome"
 import EMPAddUsers from "./view/dashboard/employee/users/addusers/AddUsers";
 import EMPAllUsers from "./view/dashboard/employee/users/allusers/AllUsers";
 import EMPAwaitingUsers from "./view/dashboard/employee/users/awaitingusers/AwaitingUsers";
 import EMPUserCategory from "./view/dashboard/employee/users/userscategory/UserCategory";
+import EMPList from "./view/dashboard/employee/employee/allEmployees/AllEmployees";
+import EMPRole from "./view/dashboard/employee/employee/employeesRole/EmployeesRole";
+
+// User Dashboard
+import UserHome from "./view/dashboard/user/home/UserHome";
 
 const WebPageLayOut = ({ children }) => {
     return (
@@ -58,6 +67,27 @@ const EmployeeDashLayout = ({ children }) => {
         </>
     );
 };
+const UserDashLayout = ({ children }) => {
+    return (
+        <>
+            <ScrollToTop />
+            <div className="flex w-full h-screen flex-row overflow-hidden">
+                <div className="flex w-fit h-screen">
+                    <UserDashSidebar />
+                </div>
+                <div className="flex flex-col flex-grow overflow-hidden">
+                    <div className="">
+                        <UserDashNavbar />
+                    </div>
+                    <div className="w-full flex overflow-hidden overflow-y-auto">
+                        {children}
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+};
+
 
 
 
@@ -108,8 +138,20 @@ const AppRoutes = () => {
                                 <Route path="addusers" element={<EMPAddUsers />} />
                                 <Route path="userscategory" element={<EMPUserCategory />} />
                                 <Route path="awaitingusers" element={<EMPAwaitingUsers />} />
+                                <Route path="allemployees" element={<EMPList />} />
+                                <Route path="employeesrole" element={<EMPRole />} />
                             </Routes>
                         </EmployeeDashLayout>
+                    }
+                />
+                <Route
+                    path="/users/*"
+                    element={
+                        <UserDashLayout>
+                            <Routes>
+                                <Route index element={<UserHome />} />
+                            </Routes>
+                        </UserDashLayout>
                     }
                 />
             </Routes>

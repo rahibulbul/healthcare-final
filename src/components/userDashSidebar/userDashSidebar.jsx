@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, Navigate, useLocation } from 'react-router-dom';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 
-const DashSidebar = () => {
+const UserDashSidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null); // Track active dropdown
     const sidebarRef = useRef(null);
@@ -101,118 +101,6 @@ const DashSidebar = () => {
                             <li>
                                 <div
                                     className='flex items-center px-5 py-3 gap-4 text-base font-medium cursor-pointer duration-500 text-slate-500 hover:bg-slate-300 hover:text-black hover:px-8'
-                                    onClick={() => toggleDropdown('employees')}
-                                >
-                                    <i className="ph ph-users-three"></i>
-                                    <span>Employees</span>
-                                    <i
-                                        className={`fa-solid fa-sort-down absolute right-3 transition-transform duration-300 ease-in-out
-                                        ${activeDropdown === 'employees' ? 'rotate-180' : ''}`}
-                                    ></i>
-                                </div>
-                                <ul
-                                    className={`overflow-hidden transition-all duration-500 ease-in-out
-                                    ${activeDropdown === 'employees' || location.pathname.includes('/employee/employees') ? 'max-h-96' : 'max-h-0'}`}
-                                >
-                                    <li>
-                                        <Link
-                                            to="/employee/allemployees"
-                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/allemployees') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
-                                        >
-                                            <i className="ph ph-dot"></i>
-                                            <span>All employees</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            to="/employee/addemployees"
-                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/addemployees') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
-                                        >
-                                            <i className="ph ph-dot"></i>
-                                            <span>Add employees</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/employee/employeesrole"
-                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/employeesrole') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
-                                        >
-                                            <i className="ph ph-dot"></i>
-                                            <span>Employees Roles</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/employee/awaitingemployees"
-                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/awaitingemployees') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
-                                        >
-                                            <i className="ph ph-dot"></i>
-                                            <span>Awaiting for verification</span>
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <div
-                                    className='flex items-center px-5 py-3 gap-4 text-base font-medium cursor-pointer duration-500 text-slate-500 hover:bg-slate-300 hover:text-black hover:px-8'
-                                    onClick={() => toggleDropdown('users')}
-                                >
-                                    <i className="ph ph-user"></i>
-                                    <span>Users</span>
-                                    <i
-                                        className={`fa-solid fa-sort-down absolute right-3 transition-transform duration-300 ease-in-out
-                                        ${activeDropdown === 'users' ? 'rotate-180' : ''}`}
-                                    ></i>
-                                </div>
-                                <ul
-                                    className={`overflow-hidden transition-all duration-500 ease-in-out
-                                    ${activeDropdown === 'users' || location.pathname.includes('/employee/users') ? 'max-h-96' : 'max-h-0'}`}
-                                >
-                                    <li>
-                                        <Link
-                                            to="/employee/allusers"
-                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/allusers') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
-                                        >
-                                            <i className="ph ph-dot"></i>
-                                            <span>All users</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            to="/employee/addusers"
-                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/addusers') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
-                                        >
-                                            <i className="ph ph-dot"></i>
-                                            <span>Add users</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/employee/userscategory"
-                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/userscategory') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
-                                        >
-                                            <i className="ph ph-dot"></i>
-                                            <span>Users category</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/employee/awaitingusers"
-                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/awaitingusers') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
-                                        >
-                                            <i className="ph ph-dot"></i>
-                                            <span>Awaiting for verification</span>
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <div
-                                    className='flex items-center px-5 py-3 gap-4 text-base font-medium cursor-pointer duration-500 text-slate-500 hover:bg-slate-300 hover:text-black hover:px-8'
                                     onClick={() => toggleDropdown('insurance')}
                                 >
                                     <i className="ph ph-umbrella-simple"></i>
@@ -224,42 +112,24 @@ const DashSidebar = () => {
                                 </div>
                                 <ul
                                     className={`overflow-hidden transition-all duration-500 ease-in-out
-                                    ${activeDropdown === 'insurance' || location.pathname.includes('/employee/insurance') ? 'max-h-96' : 'max-h-0'}`} // Smooth animation
+                                    ${activeDropdown === 'insurance' || location.pathname.includes('/users/insurance') ? 'max-h-96' : 'max-h-0'}`} // Smooth animation
                                 >
                                     <li>
-                                        <Link to="/employee/allinsurance"
+                                        <Link to="/users/myinsurance"
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/allinsurance') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                            ${isPathActive('/users/myinsurance') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
                                             <i className="ph ph-dot"></i>
-                                            <span>All insurance</span>
+                                            <span>My insurance</span>
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link to="/employee/addinsurance"
+                                        <Link to="/users/applyinsurance"
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/addinsurance') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                            ${isPathActive('/users/applyinsurance') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                         >
                                             <i className="ph ph-dot"></i>
-                                            <span>Add insurance</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/employee/insurancecategory"
-                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/insurancecategory') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
-                                        >
-                                            <i className="ph ph-dot"></i>
-                                            <span>Insurance category</span>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/employee/awaitinginsurance"
-                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
-                                            ${isPathActive('/employee/awaitinginsurance') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
-                                        >
-                                            <i className="ph ph-dot"></i>
-                                            <span>Awaiting for insurance</span>
+                                            <span>Apply for insurance</span>
                                         </Link>
                                     </li>
                                 </ul>
@@ -350,5 +220,5 @@ const DashSidebar = () => {
     );
 };
 
-export default DashSidebar;
+export default UserDashSidebar;
 

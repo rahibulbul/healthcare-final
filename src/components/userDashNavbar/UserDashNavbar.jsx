@@ -55,15 +55,10 @@ const DashNavbar = () => {
 
     // Breadcrumb
     const pathMap = {
-        "/employee": "Dashboard",
-        "/employee/allusers": "All User",
-        "/employee/addusers": "New User",
-        "/employee/userscategory": "User Category",
-        "/employee/awaitingusers": "Awaiting User",
-        "/employee/allemployees": "All Employees",
-        "/employee/addemployees": "New Employees",
-        "/employee/employeesrole": "Employees Roles",
-        "/employee/awaitingemployees": "Awaiting Employees",
+        "/users": "Dashboard",
+        "/users/myinsurance": "My insurance",
+        "/users/applyinsurance": "Apply for insurance",
+
     };
     const getPageName = (pathname) => {
         return pathMap[pathname] || "Page not found";

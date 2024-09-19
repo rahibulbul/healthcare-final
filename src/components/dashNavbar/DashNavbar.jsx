@@ -112,6 +112,7 @@ const DashNavbar = () => {
     if (!userData) {
         return <div>Loading...</div>;
     }
+
     return (
         <header className='relative w-full h-16 shadow-ui-perfect flex justify-between items-center px-10'>
             <ToastContainer

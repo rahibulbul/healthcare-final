@@ -90,6 +90,9 @@ const Login = () => {
 
                 setTimeout(() => {
                     switch (userData.usercategory) {
+                        case "company":
+                            navigate("/employee");
+                            break;
                         case "employee":
                             navigate("/employee");
                             break;

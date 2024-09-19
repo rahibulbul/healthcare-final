@@ -2,24 +2,34 @@ import { useEffect, useState } from 'react';
 import { database } from './firebaseConfig';
 import { child, equalTo, get, onValue, orderByChild, query, ref, remove, set, update } from "firebase/database";
 
+
 export const CheckUserCategory = async (userCategory) => {
     if (!database) {
         throw new Error("Firebase database is not initialized");
     }
-    const userCategoryRef = ref(database, 'users/userscategory');
-    const userCategoryQuery = query(userCategoryRef, orderByChild('usercategory'), equalTo(userCategory));
-    const snapshot = await get(userCategoryQuery);
-    if (snapshot.exists()) {
-        return true;
+
+    try {
+        const userCategoryRef = ref(database, 'healthcare/userscategory');
+        const userCategoryQuery = query(userCategoryRef, orderByChild('usercategory'), equalTo(userCategory));
+
+        const snapshot = await get(userCategoryQuery);
+
+        if (snapshot.exists()) {
+            return true; // Category exists
+        }
+
+        return false; // Category does not exist
+    } catch (error) {
+        console.error("Error checking user category:", error);
+        return false; // Return false in case of an error
     }
-    return false;
 };
 
 export const AddUserCategory = async (userCategory, userCategoryData) => {
     if (!database) {
         throw new Error("Firebase database is not initialized");
     }
-    const counterRef = child(ref(database, "counters"), "userCategoryCounter");
+    const counterRef = child(ref(database, "/healthcare/counters"), "userCategoryCounter");
     const snapshot = await get(counterRef);
     let nextId = 1;
     if (snapshot.exists()) {
@@ -28,7 +38,7 @@ export const AddUserCategory = async (userCategory, userCategoryData) => {
         await set(counterRef, nextId);
     }
     const categoryId = `${nextId}`;
-    const AddUserCategoryRef = ref(database, `users/userscategory/${categoryId}`);
+    const AddUserCategoryRef = ref(database, `healthcare/userscategory/${categoryId}`);
     await set(AddUserCategoryRef, {
         usercategory: userCategory,
         ...userCategoryData,
@@ -38,29 +48,34 @@ export const AddUserCategory = async (userCategory, userCategoryData) => {
     return categoryId;
 };
 
-
 export const FetchUserCategory = (callback) => {
-    const userCategoryRef = ref(database, 'users/userscategory');
+    const userCategoryRef = ref(database, 'healthcare/userscategory');
+
     const unsubscribe = onValue(userCategoryRef, (snapshot) => {
         const categoriesData = snapshot.val();
         if (categoriesData) {
-            const formattedCategories = Object.keys(categoriesData).map((key) => ({
-                id: key,
-                ...categoriesData[key],
-            }));
+            const formattedCategories = Object.keys(categoriesData)
+                .map((key) => ({
+                    id: key,
+                    ...categoriesData[key],
+                }))
+                .filter((category) => category.showCategory !== false);
+
             callback(formattedCategories);
         } else {
             callback([]);
         }
     });
+
     return unsubscribe;
 };
+
 
 export const UseUserCategories = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        const userCategoryRef = ref(database, "users/userscategory");
+        const userCategoryRef = ref(database, "healthcare/userscategory");
         const unsubscribe = onValue(userCategoryRef, (snapshot) => {
             if (snapshot.exists()) {
                 const data = snapshot.val();
@@ -81,7 +96,7 @@ export const UseUserCategories = () => {
 
 export const findingUserName = async (username) => {
     try {
-        const usersRef = ref(database, "users/user/");
+        const usersRef = ref(database, "healthcare/user/");
         const usersSnapshot = await get(usersRef);
 
         if (usersSnapshot.exists()) {
@@ -104,14 +119,14 @@ export const findingUserName = async (username) => {
 
 export const UserRegistration = async (userData, userCategory, year, month, week, userPrefix) => {
     try {
-        const RegisterUserCountRef = ref(database, `counters/userscounts/${year}/${month}/${week}/${userCategory}`);
+        const RegisterUserCountRef = ref(database, `healthcare/counters/userscounts/${year}/${month}/${week}/${userCategory}`);
         const UserCountSnapshot = await get(RegisterUserCountRef);
         let count = 1;
         if (UserCountSnapshot.exists()) {
             count = UserCountSnapshot.val() + 1;
         }
         const UserID = `${year}${month}${userPrefix}${count.toString().padStart(2, "0")}`;
-        await set(ref(database, `users/user/` + UserID), userData);
+        await set(ref(database, `healthcare/user/` + UserID), userData);
         await set(RegisterUserCountRef, count);
         return UserID;
     } catch (error) {
@@ -119,9 +134,10 @@ export const UserRegistration = async (userData, userCategory, year, month, week
         throw new Error("Failed to register user. Please try again.");
     }
 }
+
 export const UserLogin = async (userName, password) => {
     try {
-        const usersRef = ref(database, "users/user/");
+        const usersRef = ref(database, "healthcare/user/");
         const usersSnapshot = await get(usersRef);
         let userData = null;
         if (usersSnapshot.exists()) {
@@ -149,7 +165,7 @@ export const UserLogin = async (userName, password) => {
 };
 
 export const FetchUsers = (callback) => {
-    const usersRef = ref(database, "users/user/");
+    const usersRef = ref(database, "healthcare/user/");
     const unsubscribe = onValue(usersRef, (snapshot) => {
         const usersData = snapshot.val();
         if (usersData) {

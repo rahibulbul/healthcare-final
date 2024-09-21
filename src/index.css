@@ -8,7 +8,7 @@
 :root {
     --font-hand: "Gochi Hand", cursive;
     --font-poppins: "Poppins", system-ui;
-    --toastify-toast-width: auto;
+    /* --toastify-toast-width: auto; */
 }
 
 * {
@@ -20,9 +20,9 @@
     font-family: var(--font-poppins);
 }
 
-.Toastify__toast {
+/* .Toastify__toast {
     width: 1000px;
-}
+} */
 
 .font-hand {
     @apply font-sans;

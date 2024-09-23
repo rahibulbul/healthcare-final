@@ -401,7 +401,7 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid, GridActionsCellItem, GridRowModes } from '@mui/x-data-grid';
 import { ToastContainer, toast, Slide } from 'react-toastify';
-import { AddUserCategory, CheckUserCategory, FetchUserCategory } from "../../../../../model/userHandle";
+import { AddUserCategory, CheckUserCategory, FetchUserCategory } from "../../../../../model/handleUser";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import SaveIcon from '@mui/icons-material/Save';

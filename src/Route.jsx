@@ -26,6 +26,9 @@ import EMPRole from "./view/dashboard/employee/employee/employeesRole/EmployeesR
 
 // User Dashboard
 import UserHome from "./view/dashboard/user/home/UserHome";
+import MyInsurance from "./view/dashboard/user/insurance/myinsurance/MyInsurance";
+import AppleInsurance from "./view/dashboard/user/insurance/applyforinsuranc/ApplyInsurance";
+import InsuranceClaim from "./view/dashboard/user/insurance/insuranceclaim/InsuranceClaim";
 
 const WebPageLayOut = ({ children }) => {
     return (
@@ -150,6 +153,9 @@ const AppRoutes = () => {
                         <UserDashLayout>
                             <Routes>
                                 <Route index element={<UserHome />} />
+                                <Route path="myinsurance" element={<MyInsurance />} />
+                                <Route path="applyinsurance" element={<AppleInsurance />} />
+                                <Route path="insuranceclaim" element={<InsuranceClaim />} />
                             </Routes>
                         </UserDashLayout>
                     }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import { FaTimes, FaCheck } from 'react-icons/fa';
-import { AddEmployeeRoles, FetchEmployeeRoles, FetchEmployeeRoleById, DeleteEmployeeRole, UpdateEmployeeRole } from "../../../../../model/employeeDash"
+import { AddEmployeeRoles, FetchEmployeeRoles, FetchEmployeeRoleById, DeleteEmployeeRole, UpdateEmployeeRole } from "../../../../../model/handleEmployee"
 
 const EMPRole = () => {
     const [employeeRoleSearch, setEmployeeRoleSearch] = useState("");

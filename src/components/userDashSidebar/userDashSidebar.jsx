@@ -90,9 +90,9 @@ const UserDashSidebar = () => {
                             <li>
                                 <Link
                                     onClick={handleNonDropdownClick}
-                                    to="/employee"
+                                    to="/users"
                                     className={`flex items-center px-5 py-3 gap-4 text-base font-medium cursor-pointer duration-500 hover:bg-slate-300 hover:text-black hover:px-8
-                                    ${isPathActive('/employee') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                    ${isPathActive('/users') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                 >
                                     <i className="ph ph-house-simple"></i>
                                     <span>Overview</span>
@@ -113,8 +113,7 @@ const UserDashSidebar = () => {
                                 <ul
                                     className={`overflow-hidden transition-all duration-500 ease-in-out
                                     ${activeDropdown === 'insurance' || location.pathname.includes('/users/insurance') ? 'max-h-96' : 'max-h-0'}`} // Smooth animation
-                                >
-                                    <li>
+                                ><li>
                                         <Link to="/users/myinsurance"
                                             className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
                                             ${isPathActive('/users/myinsurance') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
@@ -130,6 +129,15 @@ const UserDashSidebar = () => {
                                         >
                                             <i className="ph ph-dot"></i>
                                             <span>Apply for insurance</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/users/insuranceclaim"
+                                            className={`flex items-center px-7 py-2 gap-4 text-sm font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-9
+                                            ${isPathActive('/users/insuranceclaim') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
+                                        >
+                                            <i className="ph ph-dot"></i>
+                                            <span>Insurance Claim</span>
                                         </Link>
                                     </li>
                                 </ul>
@@ -195,7 +203,7 @@ const UserDashSidebar = () => {
                             </li>
                             <li>
                                 <Link
-                                    to="/profilesettings"
+                                    to="/users/profilesettings"
                                     className={`flex items-center px-5 py-3 gap-4 text-base font-medium cursor-pointer duration-500  hover:bg-slate-300 hover:text-black hover:px-8
                                     ${isPathActive('/profilesettings') ? 'bg-slate-300 text-black' : 'text-slate-500'}`}
                                 >

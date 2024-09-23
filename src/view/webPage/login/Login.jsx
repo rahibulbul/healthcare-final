@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { UserLogin } from "../../../model/userHandle";
+import { UserLogin, fetchUserDataRealTime } from "../../../model/handleUser";
 import { ToastContainer, toast, Slide } from 'react-toastify';
 
 const Login = () => {
@@ -85,15 +85,14 @@ const Login = () => {
                 sessionStorage.setItem("userData", JSON.stringify(userData));
                 toast.success("Login successful . . .");
                 console.log("UserData pushed");
-                console.log("UserData stored in sessionStorage:", sessionStorage.getItem("userData"));
-
+                // console.log("UserData stored in sessionStorage:", sessionStorage.getItem("userData"));
 
                 setTimeout(() => {
                     switch (userData.usercategory) {
                         case "company":
                             navigate("/employee");
                             break;
-                        case "employee":
+                        case "Employee":
                             navigate("/employee");
                             break;
                         default:
@@ -108,6 +107,7 @@ const Login = () => {
             }
         }
     }
+
 
     return (
         <div className='relative w-full h-[calc(100vh-65px)] bg-white flex-col justify-center items-center flex'>

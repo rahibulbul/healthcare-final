@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { DataGrid, GridActionsCellItem, GridRowModes, GridToolbar } from '@mui/x-data-grid';
 import { ToastContainer, toast, Slide } from 'react-toastify';
-import { FetchUsers } from "../../../../../model/userHandle"
+import { FetchUsers } from "../../../../../model/handleUser"
 import { database } from "../../../../../model/firebaseConfig"
 
 const EMPAllUsers = () => {
